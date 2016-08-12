@@ -1,4 +1,10 @@
 #!/bin/bash
+. /opt/farm/scripts/init
+
+if [ "$HWTYPE" = "container" ] || [ "$HWTYPE" = "lxc" ]; then
+	echo "skipping ntp configuration on container"
+	exit 0
+fi
 
 if grep -q /opt/farm/scripts/check/clock.sh /etc/crontab; then
 	echo "removing old crontab entry"
